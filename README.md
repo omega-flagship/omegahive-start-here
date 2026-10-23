@@ -2,7 +2,7 @@
 
 > **Not yet reviewed.** This is handover material from PhysixSNET, published as received on 2026-10-23 so the review can happen in the open. Links still point to the original PhysixSNET repositories, which are private. The review and the fixes are tracked in this repository's issues.
 
-This organisation holds the OmegaHive work, handed to the SingularityNET architecture team so it can be reorganised into the team's own repositories. Each repository is in one of two tiers, and is either public or private: the tables below say which. Which repositories are public is a management decision; an Open repo is published only after a secret scan.
+This organisation holds the OmegaHive work, handed to the SingularityNET architecture team so it can be reorganised into the team's own repositories. Each handover repository is in one of two tiers, and is either public or private: the tables below say which. Which repositories are public is a management decision; an Open repo is published only after a secret scan.
 
 | Tier | What it means |
 |---|---|
@@ -19,23 +19,45 @@ Start with the [onboarding kit](onboarding/README.md): a learning track for your
 
 | Status | What it covers |
 |---|---|
-| **Current** | `omegahive` (the `hive/` server and UI) and the app repos. This is the design going forward. |
-| **Legacy / reference** | `omegav2` (an earlier, deeper mind design), `omegahive-candidates` (early modules), and the inherited OmegaClaw Core runtime and docs inside `omegahive` (`src/`, `modules/`, `channels/`, tutorials and references). These are outdated compared with the current hive and apps. Each is marked with a `LEGACY.md` file or a note at the top of the doc. See `omegahive/LEGACY.md` for the full map. |
+| **Current** | [`omegahive`](https://github.com/omega-flagship/omegahive) (the `hive/` server and UI) and the app repos. This is the design going forward. |
+| **Legacy / reference** | [`omegav2`](https://github.com/omega-flagship/omegav2) (an earlier, deeper mind design), [`omegahive-candidates`](https://github.com/omega-flagship/omegahive-candidates) (early modules), and the inherited OmegaClaw Core runtime and docs inside [`omegahive`](https://github.com/omega-flagship/omegahive) (`src/`, `modules/`, `channels/`, tutorials and references). These are outdated compared with the current hive and apps. Each is marked with a `LEGACY.md` file or a note at the top of the doc. See `omegahive/LEGACY.md` for the full map. |
 
 ## How the pieces connect
 
-```
-                omegahive  (platform: server, UI, Ask, minds, swarms, demos, docs, theory)
-                    │  programs contract (hive/PROGRAMS.md)
-   ┌────────┬───────┼─────────┬──────────┬───────────┬──────────┐
- apps:  tools  planner  library  design(Studio)  code  fusion  social  purple  atlas  truth
-                    │
-                omegav2  (the V2 mind: MeTTa-native body, organs, governance and theory)
-                    │
-         omegahive-candidates  (early modules that could become apps or core features)
+```mermaid
+flowchart TB
+  subgraph open["Open (Apache-2.0)"]
+    hive["omegahive<br/>platform: server, UI, Ask, minds, swarms, demos, docs, theory"]
+    subgraph openprog["programs"]
+      tools["omega-tools"] ~~~ planner["omegaplanner"] ~~~ library["omegalibrary"]
+    end
+    subgraph opendocs["docs"]
+      starthere["omegahive-start-here<br/>this map"] ~~~ schematics["omegahive-schematics<br/>diagrams and schematics"]
+    end
+  end
+
+  subgraph closed["Closed (product consideration)"]
+    design["omegadesign-app<br/>Studio"] ~~~ code["omegacode-app"] ~~~ fusion["omegafusion-app"] ~~~ social["omegasocial-app"] ~~~ purple["omegapurple-app"]
+    atlas["omegaatlas-app"] ~~~ truth["omegatruth-app"] ~~~ evolve["omegaevolve-app<br/>placeholder"] ~~~ town["omegatown-app<br/>placeholder"] ~~~ wa["whatsapp-bridge-app<br/>placeholder"]
+  end
+
+  hive -- "programs contract<br/>hive/PROGRAMS.md" --> openprog
+  hive -- "programs contract<br/>hive/PROGRAMS.md" --> closed
+
+  subgraph legacy["Legacy / reference"]
+    v2["omegav2 (Closed)<br/>the V2 mind: MeTTa-native body, organs, governance and theory"]
+    cand["omegahive-candidates (Open)<br/>early modules that could become apps or core features"]
+  end
+
+  hive -.- v2
+  v2 -.- cand
+
+  subgraph also["Also in this organisation"]
+    omega["Omega<br/>fork of singnet/Omega"] ~~~ specs["omega-specs<br/>ADRs and glossary"]
+  end
 ```
 
-Start with `omegahive`: its `docs/START_HERE.md`, `docs/FEATURES.md` (every feature, its state and where it is), `docs/STATUS.md`, `docs/MODULARITY.md` (where the coupling is and what to split first) and `docs/EARLIER_EXPERIMENTS.md`.
+Start with [`omegahive`](https://github.com/omega-flagship/omegahive): its `docs/START_HERE.md`, `docs/FEATURES.md` (every feature, its state and where it is), `docs/STATUS.md`, `docs/MODULARITY.md` (where the coupling is and what to split first) and `docs/EARLIER_EXPERIMENTS.md`.
 
 ## Repositories
 
@@ -44,37 +66,36 @@ The Closed app repos were renamed `<name>-app` on 2026-10-23; GitHub redirects t
 ### Open (Apache-2.0)
 | Repo | Visibility | What it is |
 |---|---|---|
-| `omegahive` | Private | The platform. Apache-2.0 except three Closed parts still inside it: `hive/plugins/omegaevolve` (Evolve), `hive/ui/src/experiences/omegatown` (OmegaTown) and the WhatsApp bridge (GPL-3 dependency). They have been copied to their own repos (below) and are removed from omegahive by [omegahive#1](https://github.com/omega-flagship/omegahive/issues/1). omegahive stays private until then. |
-| `omegahive-start-here` | Public | This map: every repo, its tier and visibility, and the onboarding kit. |
-| `omegahive-schematics` | Public | Diagrams and schematics for the whole platform: how it works, the intended shape, how to plug in, and what to review. Architecture review open: [omegahive-start-here#2](https://github.com/omega-flagship/omegahive-start-here/issues/2). |
-| `omegahive-start-here-history`, `omegahive-schematics-history` | Private | The full history of the two repos above, before they were republished as one-commit copies on 2026-10-23, and their issues from before that date. |
-| `omega-tools` | Public | Modular skills of thought and action. |
-| `omegaplanner` | Public | Plan checker. |
-| `omegalibrary` | Public | Knowledge node: pinned sources, page extraction, cited search. |
-| `omegahive-candidates` | Public | **Legacy / reference.** Nine early modules: flow, match, alignment, reason, learn, atom, graft, chill, connect. |
+| [`omegahive`](https://github.com/omega-flagship/omegahive) | Private | The platform. Apache-2.0 except three Closed parts still inside it: `hive/plugins/omegaevolve` (Evolve), `hive/ui/src/experiences/omegatown` (OmegaTown) and the WhatsApp bridge (GPL-3 dependency). They have been copied to their own repos (below) and are removed from omegahive by [omegahive#1](https://github.com/omega-flagship/omegahive/issues/1). omegahive stays private until then. |
+| [`omegahive-start-here`](https://github.com/omega-flagship/omegahive-start-here) | Public | This map: every repo, its tier and visibility, and the onboarding kit. |
+| [`omegahive-schematics`](https://github.com/omega-flagship/omegahive-schematics) | Public | Diagrams and schematics for the whole platform: how it works, the intended shape, how to plug in, and what to review. Architecture review open: [omegahive-start-here#2](https://github.com/omega-flagship/omegahive-start-here/issues/2). |
+| [`omega-tools`](https://github.com/omega-flagship/omega-tools) | Public | Modular skills of thought and action. |
+| [`omegaplanner`](https://github.com/omega-flagship/omegaplanner) | Public | Plan checker. |
+| [`omegalibrary`](https://github.com/omega-flagship/omegalibrary) | Public | Knowledge node: pinned sources, page extraction, cited search. |
+| [`omegahive-candidates`](https://github.com/omega-flagship/omegahive-candidates) | Public | **Legacy / reference.** Nine early modules: flow, match, alignment, reason, learn, atom, graft, chill, connect. |
 
 ### Closed Source for Product Consideration
-All private. Which of them open later is a business decision, one at a time.
+Which of them open later is a business decision, one at a time.
 
-| Repo | What it is |
-|---|---|
-| `omegadesign-app` | Studio, the creative canvas app (UI source included). |
-| `omegacode-app` | The Code service: coding workspaces, change sets, receipts. |
-| `omegafusion-app` | Forecasting-society app. |
-| `omegasocial-app` | Cross-hive channels and collaboration. |
-| `omegapurple-app` | Purple-team detection-gap app. |
-| `omegaatlas-app` | Personal scientific ledger and living map. Code only, with an invented example domain. |
-| `omegatruth-app` | Evidence-investigation app, with its design papers. |
-| `omegaevolve-app` | Evolve, the research-record registry. **Placeholder** until [omegahive#1](https://github.com/omega-flagship/omegahive/issues/1) is resolved. |
-| `omegatown-app` | The OmegaTown experience and its Ask skin. **Placeholder** until [omegahive#1](https://github.com/omega-flagship/omegahive/issues/1) is resolved. |
-| `whatsapp-bridge-app` | The WhatsApp bridge (GPL-3 dependency). **Placeholder** until [omegahive#1](https://github.com/omega-flagship/omegahive/issues/1) is resolved. |
-| `omegav2` | **Legacy / reference.** The OmegaV2 mind: 194 MeTTa organs on PeTTa/SWI-Prolog, with design and theory papers. No memories or private data. A mind, not an app, so it keeps its name. |
+| Repo | Visibility | What it is |
+|---|---|---|
+| [`omegadesign-app`](https://github.com/omega-flagship/omegadesign-app) | Private | Studio, the creative canvas app (UI source included). |
+| [`omegacode-app`](https://github.com/omega-flagship/omegacode-app) | Private | The Code service: coding workspaces, change sets, receipts. |
+| [`omegafusion-app`](https://github.com/omega-flagship/omegafusion-app) | Private | Forecasting-society app. |
+| [`omegasocial-app`](https://github.com/omega-flagship/omegasocial-app) | Private | Cross-hive channels and collaboration. |
+| [`omegapurple-app`](https://github.com/omega-flagship/omegapurple-app) | Private | Purple-team detection-gap app. |
+| [`omegaatlas-app`](https://github.com/omega-flagship/omegaatlas-app) | Private | Personal scientific ledger and living map. Code only, with an invented example domain. |
+| [`omegatruth-app`](https://github.com/omega-flagship/omegatruth-app) | Private | Evidence-investigation app, with its design papers. |
+| [`omegaevolve-app`](https://github.com/omega-flagship/omegaevolve-app) | Private | Evolve, the research-record registry. **Placeholder** until [omegahive#1](https://github.com/omega-flagship/omegahive/issues/1) is resolved. |
+| [`omegatown-app`](https://github.com/omega-flagship/omegatown-app) | Private | The OmegaTown experience and its Ask skin. **Placeholder** until [omegahive#1](https://github.com/omega-flagship/omegahive/issues/1) is resolved. |
+| [`whatsapp-bridge-app`](https://github.com/omega-flagship/whatsapp-bridge-app) | Private | The WhatsApp bridge (GPL-3 dependency). **Placeholder** until [omegahive#1](https://github.com/omega-flagship/omegahive/issues/1) is resolved. |
+| [`omegav2`](https://github.com/omega-flagship/omegav2) | Private | **Legacy / reference.** The OmegaV2 mind: 194 MeTTa organs on PeTTa/SWI-Prolog, with design and theory papers. No memories or private data. A mind, not an app, so it keeps its name. |
 
 ### Also in this organisation
 | Repo | Visibility | What it is |
 |---|---|---|
-| `Omega` | Public | A fork of `singnet/Omega`, with its workflows. |
-| `omega-specs` | Public | Architecture decision records (ADRs) and glossary for SingularityNET Omega. |
+| [`Omega`](https://github.com/omega-flagship/Omega) | Public | A fork of `singnet/Omega`, with its workflows. |
+| [`omega-specs`](https://github.com/omega-flagship/omega-specs) | Public | Architecture decision records (ADRs) and glossary for SingularityNET Omega. |
 
 ## Other private repositories (access on request)
 The owner holds further private research repositories. They are not part of this handover yet because they have not been through the privacy review applied here. Ask the owner for access to any of them:
