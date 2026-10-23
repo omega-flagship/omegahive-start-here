@@ -2,12 +2,12 @@
 
 > **Not yet reviewed.** This is handover material from PhysixSNET, published as received on 2026-10-23 so the review can happen in the open. Links still point to the original PhysixSNET repositories, which are private. The review and the fixes are tracked in this repository's issues.
 
-This organisation holds the OmegaHive work, handed to the SingularityNET architecture team so it can be reorganised into the team's own repositories. Each handover repository is in one of two tiers, and is either public or private: the tables below say which. Which repositories are public is a management decision; an Open repo is published only after a secret scan.
+This organisation holds the OmegaHive work, handed to the SingularityNET Omega Flagship HitSquad so it can be reorganised into the team's own repositories. Each handover repository is in one of two tiers, and is either public or private: the tables below say which. Which repositories are public is a management decision; an Open repo is published only after a secret scan.
 
 | Tier | What it means |
 |---|---|
 | **Open (Apache-2.0)** | Can be reused and published under Apache-2.0. |
-| **Closed Source for Product Consideration** | Shared privately with the SingularityNET team only. Do not publish, redistribute or relicense it as open source. Each closed repo has a `CLOSED_SOURCE.md`, a banner at the top of its README, and a notice in place of an open licence. |
+| **Closed Source for Product Consideration** | Shared privately with the SingularityNET Omega Flagship HitSquad only. Do not publish, redistribute or relicense it as open source. Each closed repo has a `CLOSED_SOURCE.md`, a banner at the top of its README, and a notice in place of an open licence. |
 
 If you split or move code, carry its tier with it.
 
