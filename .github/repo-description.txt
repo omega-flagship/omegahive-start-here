@@ -1,0 +1,1 @@
+Start here: the map of every OmegaHive handover repo, its tier (Open or Closed Source for Product Consideration) and how the pieces connect.
