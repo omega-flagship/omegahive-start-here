@@ -24,15 +24,31 @@ Start with the [onboarding kit](onboarding/README.md): a learning track for your
 
 ## How the pieces connect
 
-```
-                omegahive  (platform: server, UI, Ask, minds, swarms, demos, docs, theory)
-                    │  programs contract (hive/PROGRAMS.md)
-   ┌────────┬───────┼─────────┬──────────┬───────────┬──────────┐
- apps:  tools  planner  library  design(Studio)  code  fusion  social  purple  atlas  truth
-                    │
-                omegav2  (the V2 mind: MeTTa-native body, organs, governance and theory)
-                    │
-         omegahive-candidates  (early modules that could become apps or core features)
+```mermaid
+flowchart TB
+  hive["omegahive<br/>platform: server, UI, Ask, minds, swarms, demos, docs, theory"]
+
+  subgraph open["Open (Apache-2.0)"]
+    tools["omega-tools"]
+    planner["omegaplanner"]
+    library["omegalibrary"]
+  end
+
+  subgraph closed["Closed (product consideration)"]
+    design["omegadesign-app<br/>Studio"] ~~~ code["omegacode-app"] ~~~ fusion["omegafusion-app"] ~~~ social["omegasocial-app"] ~~~ purple["omegapurple-app"]
+    atlas["omegaatlas-app"] ~~~ truth["omegatruth-app"] ~~~ evolve["omegaevolve-app<br/>placeholder"] ~~~ town["omegatown-app<br/>placeholder"] ~~~ wa["whatsapp-bridge-app<br/>placeholder"]
+  end
+
+  hive -- "programs contract<br/>hive/PROGRAMS.md" --> open
+  hive -- "programs contract<br/>hive/PROGRAMS.md" --> closed
+
+  subgraph legacy["Legacy / reference"]
+    v2["omegav2<br/>the V2 mind: MeTTa-native body, organs, governance and theory"]
+    cand["omegahive-candidates<br/>early modules that could become apps or core features"]
+  end
+
+  hive -.- v2
+  v2 -.- cand
 ```
 
 Start with `omegahive`: its `docs/START_HERE.md`, `docs/FEATURES.md` (every feature, its state and where it is), `docs/STATUS.md`, `docs/MODULARITY.md` (where the coupling is and what to split first) and `docs/EARLIER_EXPERIMENTS.md`.
