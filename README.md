@@ -13,7 +13,7 @@ If you split or move code, carry its tier with it.
 
 ## New to the code
 
-Start with the [onboarding kit](onboarding/README.md): a learning track for your role, primers, a glossary, and the keep, harden or swap rubric. To take a whole team through it, use the [four-week rollout](onboarding/PROGRAM.md). For how everything fits together, with diagrams, component cards, the upgrade path, the threat model and the reviewer guide, see [`omegahive-schematics`](https://github.com/PhysixSNET/omegahive-schematics).
+Start with the [onboarding kit](onboarding/README.md): a learning track for your role, primers, a glossary, and the keep, harden or swap rubric. To take a whole team through it, use the [four-week rollout](onboarding/PROGRAM.md). For how everything fits together, with diagrams, component cards, the upgrade path, the threat model and the reviewer guide, see [`omegahive-schematics`](https://github.com/omega-flagship/omegahive-schematics).
 
 ## Current and legacy
 
@@ -45,7 +45,9 @@ The Closed app repos were renamed `<name>-app` on 2026-10-23; GitHub redirects t
 | Repo | Visibility | What it is |
 |---|---|---|
 | `omegahive` | Private | The platform. Apache-2.0 except three Closed parts still inside it: `hive/plugins/omegaevolve` (Evolve), `hive/ui/src/experiences/omegatown` (OmegaTown) and the WhatsApp bridge (GPL-3 dependency). They have been copied to their own repos (below) and are removed from omegahive by [omegahive#1](https://github.com/omega-flagship/omegahive/issues/1). omegahive stays private until then. |
-| `omegahive-schematics` | Private | Diagrams and schematics for the whole platform: how it works, the intended shape, how to plug in, and what to review. Private until the architecture review. |
+| `omegahive-start-here` | Public | This map: every repo, its tier and visibility, and the onboarding kit. |
+| `omegahive-schematics` | Public | Diagrams and schematics for the whole platform: how it works, the intended shape, how to plug in, and what to review. Architecture review open: [omegahive-start-here#2](https://github.com/omega-flagship/omegahive-start-here/issues/2). |
+| `omegahive-start-here-history`, `omegahive-schematics-history` | Private | The full history of the two repos above, before they were republished as one-commit copies on 2026-10-23, and their issues from before that date. |
 | `omega-tools` | Public | Modular skills of thought and action. |
 | `omegaplanner` | Public | Plan checker. |
 | `omegalibrary` | Public | Knowledge node: pinned sources, page extraction, cited search. |
